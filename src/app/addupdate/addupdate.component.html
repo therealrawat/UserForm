@@ -1,0 +1,222 @@
+<div class="heading">
+    <p>{{title}}</p>
+</div>
+
+
+<div class="container mt-4  mat-elevation-z4">
+    <mat-stepper #stepper>
+        <mat-step [stepControl]="myForm">
+            <br>
+            <form [formGroup]="myForm">
+                <ng-template matStepLabel>User Details</ng-template>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName" required>
+
+                    <em *ngIf="firstName && firstName.invalid && firstName.touched" style="color: red;">Invalid First
+                        Name</em>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="lastName" required>
+                    <em *ngIf="lastName && lastName.invalid && lastName.touched" style="color: red;">Invalid Last
+                        Name</em>
+                </mat-form-field>
+
+                <br>
+
+                <mat-form-field>
+                    <mat-label>Gender</mat-label>
+                    <mat-select formControlName="gender">
+                        <mat-option *ngFor="let item of genders" [value]="item.value">
+                            {{ item.viewValue }}
+                        </mat-option>
+                        <em *ngIf="gender && gender.invalid && gender.touched" style="color: red;">Plese select a
+                            gender</em>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Date of Birth</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dob">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+
+                <div>
+                    <button mat-button matStepperNext
+                        [disabled]="gender && gender.invalid  || firstName && firstName.invalid || lastName && lastName.invalid ">Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+
+        <!-- Address -->
+
+        <mat-step [stepControl]="myForm" label="Address Details">
+            <form [formGroup]="myForm">
+
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Address </mat-label>
+                    <input matInput formControlName="address">
+                    <em *ngIf="address && address.invalid && address.touched" style="color: red;">Invalid
+                        Credentials</em>
+                </mat-form-field>
+
+                <br>
+
+
+                <div class="row g-2">
+                    <div class="col-3 dropdownbox">
+
+                        <label class="" for="">Select Country</label>
+
+                        <select #country (change)="getStateData(country.value)" class=" form-control"
+                            formControlName="countryId">
+
+                            <option value="">select country</option>
+
+                            <option *ngFor="let item of countryvalue" [value]="item.countryId">{{item.countryName}}
+                            </option>
+
+                        </select>
+
+                    </div>
+                    <br>
+
+                    <div class="col-3 dropdownbox">
+
+                        <label for="">Select State</label>
+
+                        <select  #state (change)="getCityData(state.value)" class=" form-control"
+                            formControlName="stateId">
+
+                            <option value="">select state</option>
+
+                            <option *ngFor="let item of states" [value]="item.stateId">{{item.stateName}}</option>
+
+                        </select>
+
+                    </div>
+                    <br>
+
+                    <div class="col-3 dropdownbox">
+
+                        <label for="">Select City</label>
+
+                        <select  class=" form-control" formControlName="cityId">
+
+                            <option value="">Select City</option>
+
+                            <option *ngFor="let item of cities" [value]="item.cityId">{{item.cityName}}</option>
+
+                        </select>
+
+                    </div>
+                </div>
+
+
+                <!-- <mat-form-field>
+                    <mat-label>Select City</mat-label>
+                    <mat-select formControlName="cityId">
+                        <mat-option *ngFor="let item of cities" value="item.cityId">{{item.cityName}}
+                        </mat-option>
+                        <em *ngIf="cityId && cityId.invalid && cityId.touched" style="color: red;">Plese select a
+                            cityId</em>
+                    </mat-select>
+                </mat-form-field> -->
+                <br>
+
+
+
+                <mat-form-field appearance="fill">
+                    <mat-label> Zip Code </mat-label>
+                    <input matInput formControlName="postalCode" appNumbersonlydecrative>
+                    <em *ngIf="postalCode && postalCode.invalid && postalCode.touched" style="color: red;">Invalid
+                        Credentials</em>
+                </mat-form-field>
+
+
+
+
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext
+                        [disabled]="cityId && cityId.invalid || stateId && stateId.invalid || address && address.invalid || countryId && countryId.invalid">Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+        <!-- company details ends here -->
+
+        <!-- contact details -->
+        <mat-step [stepControl]="myForm" label="Contact">
+            <form [formGroup]="myForm">
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Phone Number</mat-label>
+                    <input appNumbersonlydecrative matInput formControlName="phoneNumber">
+                    <em *ngIf="phoneNumber && phoneNumber.invalid && phoneNumber.touched" style="color: red;">Please
+                        provide a valid Phone Number</em>
+                </mat-form-field>
+
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email">
+                    <em *ngIf="email && email.invalid && email.touched" style="color: red;">Please provide a valid email
+                        address</em>
+                </mat-form-field>
+
+
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext
+                        [disabled]=" phoneNumber && phoneNumber.invalid || email && email.invalid ">Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+        <!-- contact details ends here -->
+
+
+        <!-- img details -->
+        <mat-step [stepControl]="myForm" label="Profile Image">
+            <form [formGroup]="myForm">
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Profile Image</mat-label>
+                    <input matInput formControlName="imageFilename">
+                    <em *ngIf="imageFilename && imageFilename.invalid && imageFilename.touched" style="color: red;">Fiel
+                        required</em>
+                </mat-form-field>
+
+
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext
+                        [disabled]=" imageFilename && imageFilename.invalid ">Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+        <!-- img details ends here -->
+
+        <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <p>You are now done.</p>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+
+                <button mat-button color="primary" [disabled]="myForm.invalid"
+                    (click)="UpdateData(myForm.value)">Submit</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</div>

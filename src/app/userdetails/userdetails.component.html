@@ -1,0 +1,56 @@
+<!-- <div class="heading"><p>{{title}}</p></div> -->
+
+
+<!-- <button mat-icon-button class="button-fixed" color="primary" (click)="SavePDF()">
+    <mat-icon>download</mat-icon>
+</button> -->
+
+
+<div class="container mt-4" id="content" #content style="height: 70vh;">
+    <div class="d-flex  align-items-center justify-content-between flex-column mt-4 mb-4">
+        <img class="img" src={{imgSource}} alt="dp" width="180px" >
+        <br>
+        <p style="font-weight: 400;">{{name}}</p>
+    </div>
+
+    <div>
+
+    </div>
+
+    <div>
+        <div class="m-25p">
+            <div class="row">
+                <div class="col-6">
+                    <p>Gender : {{gender}}</p>
+                </div>
+                <div class="col-6">
+                    <p>Date of Birth : {{dob | date: "dd-MM-yyyy"}}</p>
+                </div>
+                <div class="col-6">
+                    <p> Phone : {{phoneNumber}}</p>
+                </div>
+                <div class="col-6">
+                    <p>Email : {{email}}</p>
+                </div>
+                <div class="col-6">
+                    <p>Country : {{country}}</p>
+                </div>
+                <div class="col-6">
+                    <p>City : {{city}}</p>
+                </div>
+                <div class="col-6">
+                    <p>State : {{state}}</p>
+                </div>
+                <div class="col-6">
+                    <p>Zip Code : {{zipcode}}</p>
+                </div>
+
+                <div class="col-12">
+                    <p>Address : {{address}}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
